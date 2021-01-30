@@ -14,7 +14,7 @@ namespace UnitTests
             var reels = Substitute.For<IReels>();
             var dispatcher = Substitute.For<IDomainEventDispatcher>();
 
-            reels.Play(Arg.Any<string>()).Returns(new IReels.PlayResult(true, new List<string>{ "word" }));
+            reels.Play("word").Returns(new IReels.PlayResult(true, new List<string>{ "word" }));
             reels.Get().Returns("other");
             tableScore.CorrectPlay(Arg.Any<string[]>()).Returns(5d);
             tableScore.Get().Returns(5d);
@@ -44,7 +44,7 @@ namespace UnitTests
             var reels = Substitute.For<IReels>();
             var dispatcher = Substitute.For<IDomainEventDispatcher>();
 
-            reels.Play(Arg.Any<string>()).Returns(new IReels.PlayResult(false, new List<string> { "word" }));
+            reels.Play("word").Returns(new IReels.PlayResult(false, new List<string> { "word" }));
             reels.Get().Returns("other");
             tableScore.CorrectPlay(Arg.Any<string[]>()).Returns(5d);
             tableScore.Get().Returns(5d);
