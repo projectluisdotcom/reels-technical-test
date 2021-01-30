@@ -5,14 +5,14 @@ COPY *.sln .
 COPY App/*.csproj ./App/
 COPY Domain/*.csproj ./Domain/
 COPY Data/*.csproj ./Data/
-COPY Tests/UnitTests/*.csproj ./Tests/UnitTests/
+COPY UnitTests/*.csproj ./UnitTests/
 
 RUN dotnet restore
 
 COPY App/. ./App/
 COPY Domain/. ./Domain/
 COPY Data/. ./Data/
-COPY Tests/UnitTests/. ./Tests/UnitTests/
+COPY UnitTests/. ./UnitTests/
 
 RUN dotnet test -c Release
 
