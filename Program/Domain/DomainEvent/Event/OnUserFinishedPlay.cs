@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ReelWords.Domain
 {
@@ -16,6 +17,19 @@ namespace ReelWords.Domain
             LastPlayScore = lastPlayScore;
             IsCorrect = isCorrect;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is OnUserFinishedPlay play &&
+                   EqualityComparer<IEnumerable<string>>.Default.Equals(Matches, play.Matches) &&
+                   TotalScore == play.TotalScore &&
+                   LastPlayScore == play.LastPlayScore &&
+                   IsCorrect == play.IsCorrect;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Matches, TotalScore, LastPlayScore, IsCorrect);
+        }
     }
 }
-

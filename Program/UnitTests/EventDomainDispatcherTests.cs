@@ -17,7 +17,7 @@ namespace ReelWordsTests
 
             eventDispatcher.Send(new EventOne());
 
-            implementationOneEventOne.Received().Execute(Arg.Any<EventOne>());
+            implementationOneEventOne.Received(1).Execute(Arg.Any<EventOne>());
         }
 
         [Fact]
@@ -32,8 +32,8 @@ namespace ReelWordsTests
 
             eventDispatcher.Send(new EventOne());
 
-            instanceOne.Received().Execute(Arg.Any<EventOne>());
-            instanceTwo.Received().Execute(Arg.Any<EventOne>());
+            instanceOne.Received(1).Execute(Arg.Any<EventOne>());
+            instanceTwo.Received(1).Execute(Arg.Any<EventOne>());
         }
 
         [Fact]
@@ -48,8 +48,8 @@ namespace ReelWordsTests
 
             eventDispatcher.Send(new EventOne());
 
-            implementationOneEventOne.Received().Execute(Arg.Any<EventOne>());
-            implementationTwoEventOne.Received().Execute(Arg.Any<EventOne>());
+            implementationOneEventOne.Received(1).Execute(Arg.Any<EventOne>());
+            implementationTwoEventOne.Received(1).Execute(Arg.Any<EventOne>());
         }
 
         [Fact]
@@ -64,8 +64,8 @@ namespace ReelWordsTests
 
             eventDispatcher.Send(new EventOne());
 
-            implementationOneEventOne.Received().Execute(Arg.Any<EventOne>());
-            implementationOneEventTwo.Received().Execute(Arg.Any<EventTwo>());
+            implementationOneEventOne.Received(1).Execute(Arg.Any<EventOne>());
+            implementationOneEventTwo.Received(1).Execute(Arg.Any<EventTwo>());
         }
 
         [Fact]
