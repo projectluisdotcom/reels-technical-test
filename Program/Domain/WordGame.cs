@@ -13,8 +13,6 @@
             _domainEventDispatcher = domainEventDispatcher;
             _tableScore = tableScore;
             _reels = reels;
-
-            IsPlaying = true;
         }
 
         public void Init()
@@ -22,6 +20,7 @@
             _domainEventDispatcher.Send(new OnUserStartedGame());
             _reels.Suffle(new System.Random());
             _domainEventDispatcher.Send(new OnUserStartedNextPlay(_reels.Get()));
+            IsPlaying = true;
         }
 
         public void Play(string input)
