@@ -6,10 +6,6 @@ using ReelWords.Domain;
 
 namespace ReelWords.App
 {
-    // TODO: Tema de init async
-    // TODO: Separar Program.cs en installer
-    // TODO: Tema de encapsular el input y sacarlo fuera de Program
-
     class Program
     {
         static void Main(string[] args)
@@ -28,15 +24,15 @@ namespace ReelWords.App
             var reelsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, configuration.GetSection("reelsPath").Value);
             var scoresPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, configuration.GetSection("scoresPath").Value);
             var wordsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, configuration.GetSection("wordsPath").Value);
+            var gameRepository = new FileGameDataSource(reelsPath, scoresPath, wordsPath);
 
             var eventDomainDispatcher = new EventDomainDispatcher();
-
             eventDomainDispatcher.Add<OnUserStartedGame, ConsoleOnUserStartedGame>(new ConsoleOnUserStartedGame());
             eventDomainDispatcher.Add<OnUserFinishedPlay, ConsoleOnUserFinishedPlay>(new ConsoleOnUserFinishedPlay());
             eventDomainDispatcher.Add<OnUserStartedNextPlay, ConsoleOnUserStartedNextPlay>(new ConsoleOnUserStartedNextPlay());
 
             var trieFactory = new TrieWorldImplementationFactory();
-            var gameRepository = new FileGameDataSource(reelsPath, scoresPath, wordsPath);
+
             var game = await new DefaultGameFactory(gameRepository, trieFactory, eventDomainDispatcher).Create();
                 
             game.Init();
