@@ -7,13 +7,18 @@ namespace ReelWords.Domain
 {
     public class SingleMatchReels : IReels
     {
-        private readonly IEnumerable<Queue<char>> _reels;
+        private readonly IList<Queue<char>> _reels;
         private readonly IWordValidator _validator;
 
-        public SingleMatchReels(IEnumerable<IEnumerable<char>> initialReels, IWordValidator validator)
+        public SingleMatchReels(IReadOnlyList<string> initialReels, IWordValidator validator)
         {
             _validator = validator;
-            var reelsList = new List<IEnumerable<char>>(initialReels);
+            var reelsList = new List<IList<char>>();
+            foreach (var initialReel in initialReels)
+            {
+                reelsList.Add(initialReel.ToList());
+            }
+
             var reelsQueue = new List<Queue<char>>();
 
             reelsList.ForEach(chars =>

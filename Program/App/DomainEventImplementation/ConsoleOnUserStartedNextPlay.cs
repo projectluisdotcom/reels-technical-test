@@ -3,7 +3,7 @@ using ReelWords.Domain;
 
 namespace ReelWords.App
 {
-    public class ConsoleOnUserStartedNextPlay : IDomainEventCommand<OnUserStartedNextPlay>
+    public class ConsoleOnUserStartedNextPlay : IDomainEventHandler<OnUserStartedNextPlay>
     {
         public void Execute(OnUserStartedNextPlay @event)
         {

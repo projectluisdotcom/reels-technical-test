@@ -1,6 +1,6 @@
 ﻿namespace ReelWords.Domain
 {
-    public interface IDomainEventCommand<T>
+    public interface IDomainEventHandler<T>
         where T : IDomainEvent
     {
         public void Execute(T @event); 

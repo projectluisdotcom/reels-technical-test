@@ -19,23 +19,23 @@ namespace ReelWords.Data
             _wordsPath = wordsPath;
         }
 
-        public Task<IEnumerable<string>> FetchAllReels()
+        public Task<IReadOnlyList<string>> FetchAllReels()
         {
             var content = File.ReadAllLines(_reelsPath);
-            var list = new List<string>(content);
-            return Task.FromResult(list.Select(x => string.Join("", x.Split(" "))));
+            var parsed = content.Select(x => string.Join("", x.Split(" ")));
+            IReadOnlyList<string> readOnly = parsed.ToList();
+            return Task.FromResult(readOnly);
         }
 
         public Task<Dictionary<char, double>> FetchAllTableScores()
         {
             var content = File.ReadAllLines(_tableScoresPath);
-            var list = new List<string>(content);
-            return Task.FromResult(list.ToDictionary(x => x.Split(" ")[0][0], x => double.Parse(x.Split(" ")[1])));
+            return Task.FromResult(content.ToDictionary(x => x.Split(" ")[0][0], x => double.Parse(x.Split(" ")[1])));
         }
 
-        public Task<IEnumerable<string>> FetchAllWords()
+        public Task<IReadOnlyList<string>> FetchAllWords()
         {
-            IEnumerable<string> words = File.ReadAllLines(_wordsPath);
+            IReadOnlyList<string> words = File.ReadAllLines(_wordsPath);
             return Task.FromResult(words);
         }
     }

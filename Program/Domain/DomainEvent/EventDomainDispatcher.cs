@@ -22,14 +22,14 @@ namespace ReelWords.Domain
             }
             foreach (var command in commands)
             {
-                var casted = (IDomainEventCommand<T>)command;
+                var casted = (IDomainEventHandler<T>)command;
                 casted.Execute(@event);
             }
         }
 
         public void Add<TDomainEvent, TDomainEventCommand>(TDomainEventCommand command)
             where TDomainEvent : IDomainEvent
-            where TDomainEventCommand : IDomainEventCommand<TDomainEvent>
+            where TDomainEventCommand : IDomainEventHandler<TDomainEvent>
         {
             var type = typeof(TDomainEvent);
             if (!_events.ContainsKey(type))

@@ -80,19 +80,19 @@ namespace ReelWordsTests
 
         public class EventTwo : IDomainEvent { }
 
-        public class ImplementationOneEventOne : IDomainEventCommand<EventOne>
+        public class ImplementationOneEventOne : IDomainEventHandler<EventOne>
         {
             public void Execute(EventOne @event)
             {
             }
         }
-        public class ImplementationTwoEventOne : IDomainEventCommand<EventOne>
+        public class ImplementationTwoEventOne : IDomainEventHandler<EventOne>
         {
             public void Execute(EventOne @event)
             {
             }
         }
-        public class ImplementationOneEventTwo : IDomainEventCommand<EventTwo>
+        public class ImplementationOneEventTwo : IDomainEventHandler<EventTwo>
         {
             public void Execute(EventTwo @event)
             {

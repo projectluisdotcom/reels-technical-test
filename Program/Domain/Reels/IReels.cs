@@ -9,12 +9,12 @@ namespace ReelWords.Domain
         public PlayResult Play(string text);
         public void Suffle(Random random);
 
-        public class PlayResult
+        public struct PlayResult
         {
             public readonly bool IsCorrect;
-            public readonly IEnumerable<string> Matches;
+            public readonly IReadOnlyList<string> Matches;
 
-            public PlayResult(bool isCorrect, IEnumerable<string> matches)
+            public PlayResult(bool isCorrect, IReadOnlyList<string> matches)
             {
                 IsCorrect = isCorrect;
                 Matches = matches;
